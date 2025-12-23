@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        jdk 'JDK21+35'  // Must match the JDK name configured in Jenkins Tools
+        jdk 'JDK21'
     }
     
     stages {
@@ -16,7 +16,6 @@ pipeline {
         
         stage('Checkout') {
             steps {
-                // The checkout happens automatically when using "Pipeline script from SCM"
                 echo 'Code checked out from Git'
                 git branch: 'main', url: 'https://github.com/251027-Java/jenkins-pipeline-walkerrd2.git'
             }
