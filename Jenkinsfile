@@ -18,25 +18,32 @@ pipeline {
             steps {
                 // The checkout happens automatically when using "Pipeline script from SCM"
                 echo 'Code checked out from Git'
+                git branch: 'main', url: 'https://github.com/251027-Java/jenkins-pipeline-walkerrd2.git'
             }
         }
         
         stage('Build') {
             steps {
-                sh 'chmod +x mvnw'
-                sh './mvnw clean compile'
+                dir('starter_code') {
+                    sh 'chmod +x mvnw'
+                    sh './mvnw clean compile'
+                }
             }
         }
         
         stage('Test') {
             steps {
-                sh './mvnw test'
+                dir('starter_code') {
+                    sh './mvnw test'
+                }
             }
         }
         
         stage('Package') {
             steps {
-                sh './mvnw package -DskipTests'
+                dir('starter_code') {
+                    sh './mvnw package -DskipTests'
+                }
             }
         }
     }
